@@ -11,6 +11,7 @@ def makeLevelButton(pygame, screen, num, xy, size, onclick):
         pygame.display.update()
         return button
 def loop(pygame, screen, size):
+        global path
         ret = None
         running = True
         #종료 조건, 리턴값
@@ -26,7 +27,7 @@ def loop(pygame, screen, size):
         #
         stagebutton_size = (96, 96)
         stagebutton_margin = (48, 48)
-        button_xy = [stagebutton_margin[0], stagebutton_margin[1]]
+        button_xy = [stagebutton_margin[0], stagebutton_margin[1]*2]
         for i in range(1, 3):
                 button_onclick = getOnClick(i)
                 b = makeLevelButton(pygame, screen, i, tuple(button_xy), stagebutton_size, button_onclick)
@@ -35,6 +36,16 @@ def loop(pygame, screen, size):
                 if button_xy[0] > size[0]-stagebutton_margin[0]:
                         button_xy[0] = stagebutton_margin[0]
                         button_xy[1] += stagebutton_margin[1] + stagebutton_size[1]
+        #스테이지 선택 버튼
+        def back_callback():
+                nonlocal ret, running
+                ret = 'main'
+                running = False
+        back = Button((48, 48), (0, 0), path+'back.png', back_callback, pygame)
+        buttons.append(back)
+        screen.blit(back.image, back.xy)
+        pygame.display.update()
+        #메인으로 돌아가기 버튼
         while running:
                 ev=pygame.event.get()
                 for event in ev:
