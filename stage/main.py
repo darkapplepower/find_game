@@ -1,6 +1,7 @@
 import os
 import sys
 from .onclick import Click
+from .button import Button
 def loop(pygame, screen, size):
         ret = None
         running = True
@@ -12,11 +13,9 @@ def loop(pygame, screen, size):
                 nonlocal ret, running
                 ret = 'selectstage'
                 running = False
-        start_button_rect = Click((size[0]/3, size[1]/4), (size[0]/3, size[1]/8*3), start_button_onclick, pygame)
-        start_button = pygame.image.load(path+"\\image\\start_button.png")
-        start_button = pygame.transform.scale(start_button, start_button_rect.size)
-        screen.blit(start_button, start_button_rect.xy)
-        buttons.append(start_button_rect)
+        start_button = Button((size[0]/3, size[1]/4), (size[0]/3, size[1]/8*3), path+"\\image\\start_button.png", start_button_onclick, pygame)
+        screen.blit(start_button.image, start_button.xy)
+        buttons.append(start_button)
 
         pygame.display.flip()
         #변수 선언, 고정 오브젝트 설정 등

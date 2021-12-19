@@ -1,16 +1,15 @@
 from .onclick import Click
+from .button import Button
 import os
 path = os.path.dirname(os.path.abspath(__file__)) + '\\image\\'
 #이미지 불러오기 위한 현재 폴더 위치
 def makeLevelButton(pygame, screen, num, xy, size, onclick):
         global path
         button_path = path + 'stage_button_'+str(num)+'.png'
-        button_rect = Click(size, xy, onclick, pygame)
-        button = pygame.image.load(button_path)
-        button = pygame.transform.scale(button, button_rect.size)
-        screen.blit(button, button_rect.xy)
+        button = Button(size, xy, button_path, onclick, pygame)
+        screen.blit(button.image, button.xy)
         pygame.display.update()
-        return button_rect
+        return button
 def loop(pygame, screen, size):
         ret = None
         running = True
