@@ -1,1 +1,1 @@
-__all__ = ["main", "selectstage"]
+__all__ = ["main", "selectstage", "1", "2", "3"]
