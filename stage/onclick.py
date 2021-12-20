@@ -1,7 +1,7 @@
 class Click:
         def __init__(self, size, xy, callback, pygame):
                 self.size = size
-                self.xy = xy
+                self.xy = list(xy)
                 self.callback = callback
                 self.rect = pygame.Rect(xy, size)
         def move(self, xy):
