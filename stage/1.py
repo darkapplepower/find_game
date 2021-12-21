@@ -46,8 +46,23 @@ def loop(pygame, screen, size):
                 n2['c'] = not n2['c']
         n2['b'] = Button((96, 96), (384, 336), path + 'stage1_n.png', n2_callback, pygame)
 
-        objects = [s, i, n1, x, n2]
-        buttons = [s['b'], i['b'], n1['b'], x['b'], n2['b']]
+        def back_callback():
+                nonlocal ret, running
+                ret = 'selectstage'
+                running = False
+        back = Button((48, 48), (0, 0), path+'back.png', back_callback, pygame)
+
+        def reset_callback():
+                nonlocal s, i, n1, x, n2
+                s['c'] = True
+                i['c'] = True
+                n1['c'] = True
+                x['c'] = True
+                n2['c'] = True
+        reset = Button((48, 48), (912, 0), path + 'retry.png', reset_callback, pygame)
+        objects = [s, i, n1, x, n2, {'b': back, 'c': 1}, {'b': reset, 'c': 1}]
+        buttons = [s['b'], i['b'], n1['b'], x['b'], n2['b'], back, reset]
+        
         def endgame():
                 nonlocal running, ret, s, i, x
                 running = False
@@ -69,9 +84,9 @@ def loop(pygame, screen, size):
                         time.sleep(0.03)
                 time.sleep(3)
                 screen.fill((255, 255, 255))
-                sex = pygame.image.load(path + 'stage1_6.png')
-                sex = pygame.transform.scale(sex, (size[0]/3, size[1]/2))
-                screen.blit(sex, (size[0]/3, size[1]/4))
+                six = pygame.image.load(path + 'stage1_6.png')
+                six = pygame.transform.scale(six, (size[0]/3, size[1]/2))
+                screen.blit(six, (size[0]/3, size[1]/4))
                 pygame.display.update()
                 time.sleep(3)
 
