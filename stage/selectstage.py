@@ -28,7 +28,7 @@ def loop(pygame, screen, size):
         stagebutton_size = (96, 96)
         stagebutton_margin = (48, 48)
         button_xy = [stagebutton_margin[0], stagebutton_margin[1]*2]
-        for i in range(1, 4):
+        for i in range(1, 5):
                 button_onclick = getOnClick(i)
                 b = makeLevelButton(pygame, screen, i, tuple(button_xy), stagebutton_size, button_onclick)
                 buttons.append(b)
