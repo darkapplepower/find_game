@@ -11,6 +11,14 @@ def loop(pygame, screen, size):
         def reset_callback():
                 nonlocal b_num
                 b_num = [0,0,0,0,0,0,0]
+        def back_callback():
+                nonlocal ret, running
+                ret = 'selectstage'
+                running = False
+        reset = Button((48, 48), (48, 0), path + 'retry.png', reset_callback, pygame)
+        buttons.append(reset)
+        back = Button((48, 48), (0, 0), path+'back.png', back_callback, pygame)
+        buttons.append(back)
         ci = 0
         def b_getCallBack(i):
                 nonlocal ci
@@ -67,11 +75,17 @@ def loop(pygame, screen, size):
                 screen.blit(clear, (size[0]/6, size[1]/4))
                 pygame.display.update()
                 time.sleep(3)
+                clear = pygame.image.load(path + 's.png')
+                clear = pygame.transform.scale(clear, (size[0]/3*2, size[1]/2))
+                screen.blit(clear, (size[0]/6, size[1]/4))
+                pygame.display.update()
+                time.sleep(3)
         door = pygame.image.load(path + 'door_close.png')
         door = pygame.transform.scale(door, (size[0]/3, size[1]/3*2))
         while running:
                 screen.fill((255, 255, 255))
                 ev=pygame.event.get()
+                screen.blit(door, (0, 0))
                 for i in buttons:
                         screen.blit(i.image, i.xy)
                 for j in range(7):
@@ -80,6 +94,5 @@ def loop(pygame, screen, size):
                 for event in ev:
                         if event.type==pygame.MOUSEBUTTONUP and event.button==1:
                                 Click.checkOnClick(buttons, pygame.mouse.get_pos())
-                screen.blit(door, (0, 0))
                 pygame.display.update()
         return ret
